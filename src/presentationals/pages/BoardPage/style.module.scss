@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  padding: 24px;
+}
+
+.area {
+  width: 300px;
+  height: 300px;
+  padding: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: 1px solid black;
+}
+
+.picked {
+  opacity: 0.4;
+}
+
+.droppable {
+  background-color: red;
+}
