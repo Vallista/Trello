@@ -14,7 +14,7 @@ export interface DraggableBond {
 }
 
 export interface DraggableOption {
-  draggableClassName: string
+  className: string
 }
 
 const createDraggableBond = (option: DraggableOption): DraggableBond => ({
@@ -27,62 +27,8 @@ const createDraggableBond = (option: DraggableOption): DraggableBond => ({
   onDragEnd: (e) => {}
 })
 
-export interface DroppableState {
-  over: boolean
-}
-
-export interface DroppableBond {
-  onDrop: React.DragEventHandler
-  onDragOver: React.DragEventHandler
-  onDragLeave: React.DragEventHandler
-}
-
-export interface DroppableOption {
-  droppableClassName: string
-}
-
-const createDroppableBond = (option: DroppableOption): DroppableBond => ({
-  onDrop: (e) => {
-    e.stopPropagation()
-
-    const data = e.dataTransfer.getData('text')
-    const droppableLayer = document.getElementById(data)
-
-    if (droppableLayer) {
-      e.currentTarget.appendChild(droppableLayer)
-
-      if (e.currentTarget.classList.contains(option.droppableClassName)) {
-        e.currentTarget.classList.remove(option.droppableClassName)
-      }
-    }
-  },
-
-  onDragOver: (e) => {
-    e.preventDefault()
-    e.dataTransfer.dropEffect = 'move'
-
-    if (!e.currentTarget.classList.contains(option.droppableClassName)) {
-      e.currentTarget.classList.add(option.droppableClassName)
-    }
-  },
-
-  onDragLeave: (e) => {
-    e.preventDefault()
-
-    if (e.currentTarget.classList.contains(option.droppableClassName)) {
-      e.currentTarget.classList.remove(option.droppableClassName)
-    }
-  }
-})
-
 export const useDraggable = (option: DraggableOption): [DraggableBond] => {
   const bond: DraggableBond = useMemo(() => createDraggableBond(option), [])
-
-  return [ bond ]
-}
-
-export const useDroppable = (option: DroppableOption): [DroppableBond] => {
-  const bond: DroppableBond = useMemo(() => createDroppableBond(option), [])
 
   return [ bond ]
 }

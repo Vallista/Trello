@@ -1,12 +1,13 @@
 import React from 'react'
-import { useDraggable, useDroppable } from '../../../plugins/useDraggable'
+import { useDraggable } from '../../../plugins/useDraggable'
+import { useDroppable } from '../../../plugins/useDroppable'
 import classNames from 'classnames'
 
 import styles from './style.module.scss'
 
 const BoardPage: React.FC = () => {
-  const [ bond ] = useDraggable({ draggableClassName: styles.draggable })
-  const [ areaBond ] = useDroppable({ droppableClassName: styles.droppable })
+  const [ bond ] = useDraggable({ className: styles.draggable })
+  const [ areaBond ] = useDroppable({ className: styles.droppable })
 
   return (
     <div className={styles.container}>
