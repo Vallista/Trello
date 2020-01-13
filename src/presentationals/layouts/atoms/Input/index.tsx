@@ -11,8 +11,9 @@ interface IProps {
 
 const Input: React.FC<IProps> = ({ className, onChange, value }) => {
   const classProps = classNames(styles.default, className)
+  const type = typeof value === 'string' ? 'string' : 'number'
 
-  return <input className={classProps} onChange={onChange} value={value} />
+  return <input type={type} className={classProps} onChange={onChange} value={value} />
 }
 
 export default Input

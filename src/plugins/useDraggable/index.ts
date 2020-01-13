@@ -14,7 +14,7 @@ export interface DraggableBond {
 }
 
 export interface DraggableOption {
-  className: string
+  className?: string
 }
 
 const createDraggableBond = (option: DraggableOption): DraggableBond => ({

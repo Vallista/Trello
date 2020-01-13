@@ -11,7 +11,7 @@ export interface DroppableBond {
 }
 
 export interface DroppableOption {
-  className: string
+  className?: string
 }
 
 const createDroppableBond = (option: DroppableOption): DroppableBond => ({
@@ -24,6 +24,8 @@ const createDroppableBond = (option: DroppableOption): DroppableBond => ({
     if (droppableLayer) {
       e.currentTarget.appendChild(droppableLayer)
 
+      if (!option.className) return
+
       if (e.currentTarget.classList.contains(option.className)) {
         e.currentTarget.classList.remove(option.className)
       }
@@ -34,13 +36,18 @@ const createDroppableBond = (option: DroppableOption): DroppableBond => ({
     e.preventDefault()
     e.dataTransfer.dropEffect = 'move'
 
+    if (!option.className) return
+
     if (!e.currentTarget.classList.contains(option.className)) {
+      console.log(e.currentTarget)
       e.currentTarget.classList.add(option.className)
     }
   },
 
   onDragLeave: (e) => {
     e.preventDefault()
+
+    if (!option.className) return
 
     if (e.currentTarget.classList.contains(option.className)) {
       e.currentTarget.classList.remove(option.className)
